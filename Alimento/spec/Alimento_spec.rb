@@ -31,6 +31,20 @@ describe Alimento do
     end
   end
 
+  describe "# Calculos con las variables" do
+    it 'The number of proteins was formated' do
+      expect(@huevo.format_proteins).to eq(56.4)
+    end
+
+    it 'The number of carbohydrates was formated' do
+      expect(@huevo.format_ch).to eq(0)
+    end
+
+    it 'The number of lipids was formated' do
+      expect(@huevo.format_lipids).to eq(175.5)
+    end
+  end
+
   it 'does something useful' do
     expect(false).to eq(true)
   end

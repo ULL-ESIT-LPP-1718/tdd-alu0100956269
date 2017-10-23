@@ -9,4 +9,18 @@ class Comida
     @lipids = lipids_value
   end
 
+  def format_proteins
+    proteins_kcal = @proteins * 4
+    return proteins_kcal
+  end
+
+  def format_ch
+    ch_kcal = @carbohydrates * 4
+    return ch_kcal
+  end
+
+  def format_lipids
+    lipids_kcal = @lipids * 9
+    return lipids_kcal
+  end
 end
