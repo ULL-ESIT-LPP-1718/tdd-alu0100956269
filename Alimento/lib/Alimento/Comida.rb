@@ -9,4 +9,8 @@ class Comida
     @lipids = lipids_value
   end
 
+  def to_s
+    "p: #{@proteins}, c: #{@carbohydrates}, l: #{@lipids}"
+  end
+
 end

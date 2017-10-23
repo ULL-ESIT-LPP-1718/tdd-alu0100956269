@@ -29,6 +29,10 @@ describe Alimento do
     it 'has a number of lipids' do
       expect(@huevo.lipids).to eq(19.5)
     end
+
+    it 'show us the 3 values' do
+      expect(@huevo.to_s).to eq('p: 14.1, c: 0.0, l: 19.5')
+    end
   end
 
   it 'does something useful' do
