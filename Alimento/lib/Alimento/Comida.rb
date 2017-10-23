@@ -9,12 +9,12 @@ class Comida
     @lipids = lipids_value
   end
 
-<<<<<<< HEAD
+#<<<<<<< HEAD
   def to_s
     "p: #{@proteins}, c: #{@carbohydrates}, l: #{@lipids}"
   end
 
-=======
+#=======
   def format_proteins
     proteins_kcal = @proteins * 4
     return proteins_kcal
@@ -34,5 +34,9 @@ class Comida
     @energ_val = format_proteins + format_ch + format_lipids
     return @energ_val
   end
->>>>>>> desarrollo
+#>>>>>>> desarrollo
+
+  def show_ev
+    "The fortmated values are: p->#{format_proteins}, c->#{format_ch}, l->#{format_lipids}; The energ. value is -> #{val_energ} kcal"
+  end
 end

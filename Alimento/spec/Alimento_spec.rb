@@ -55,6 +55,12 @@ describe Alimento do
       expect(@huevo.val_energ).to eq(231.9)
     end
   end
+
+  describe "# Salidas finales" do
+    it 'show us the formated values and the energetic value' do
+      expect(@huevo.show_ev).to eq('The fortmated values are: p->56.4, c->0.0, l->175.5; The energ. value is -> 231.9 kcal')
+    end
+  end
  
   it 'does something useful' do
     expect(false).to eq(true)
