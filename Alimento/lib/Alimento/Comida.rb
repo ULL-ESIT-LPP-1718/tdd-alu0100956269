@@ -23,4 +23,9 @@ class Comida
     lipids_kcal = @lipids * 9
     return lipids_kcal
   end
+
+  def val_energ
+    @energ_val = format_proteins + format_ch + format_lipids
+    return @energ_val
+  end
 end

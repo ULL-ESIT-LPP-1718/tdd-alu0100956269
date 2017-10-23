@@ -45,6 +45,13 @@ describe Alimento do
     end
   end
 
+  
+  describe "# Operación suma" do
+    it 'obtain energetic value' do
+      expect(@huevo.val_energ).to eq(231.9)
+    end
+  end
+ 
   it 'does something useful' do
     expect(false).to eq(true)
   end
