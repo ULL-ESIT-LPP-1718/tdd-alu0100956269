@@ -40,3 +40,4 @@ class Comida
     "The fortmated values are: p->#{format_proteins}, c->#{format_ch}, l->#{format_lipids}; The energ. value is -> #{val_energ} kcal"
   end
 end
+
