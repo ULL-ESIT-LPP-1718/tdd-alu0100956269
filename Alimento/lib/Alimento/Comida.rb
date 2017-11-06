@@ -41,3 +41,20 @@ class Comida
   end
 end
 
+
+
+class Comida_clasif < Comida
+  attr_reader :type
+ 
+  def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value)
+    super (name_value, proteins_value, carbohydrates_value, lipids_value)
+    @type = type_value
+  end
+
+  def to_s
+    out = "#{@name} belong to #{@type} and its qualities are "
+    out << super.to_s
+    return out
+  end
+end
+

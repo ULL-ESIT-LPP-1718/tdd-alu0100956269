@@ -3,7 +3,6 @@
 Node = Struct.new(:value, :next, :prev)
 
 class List
-  @@number_of_list
  
   attr_reader :head, :tale
 
@@ -36,4 +35,5 @@ class List
     end
   end
 
+  
 end

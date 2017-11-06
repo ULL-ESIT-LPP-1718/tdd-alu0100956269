@@ -7,15 +7,15 @@ require 'Alimento/List.rb'
 
 describe Alimento do
   before :all do
-    @huevo = Comida.new("Huevo", 14.1, 0.0, 19.5)
-    @leche = Comida.new("Leche", 3.3, 4.8, 3.2)
-    @yogurt = Comida.new("Yogurt", 3.8, 4.9, 3.8)
-    @cerdo = Comida.new("Cerdo", 21.5, 0.0, 6.3)
-    @ternera = Comida.new("Ternera", 21.1, 0.0, 3.1)
-    @pollo = Comida.new("Pollo", 20.6, 0.0, 5.6)
-    @bacalao = Comida.new("Bacalao", 17.7, 0.0, 0.4)
-    @atun = Comida.new("Atun", 21.5, 0.0, 15.5)
-    @salmon = Comida.new("Salmon", 19.9, 0.0, 13.6)
+    @huevo = Comida_clasif.new("Huevo", 14.1, 0.0, 19.5, "huevos, lacteos y helados")
+    @leche = Comida_clasif.new("Leche", 3.3, 4.8, 3.2, "huevos, lacteos y helados")
+    @yogurt = Comida_clasif.new("Yogurt", 3.8, 4.9, 3.8, "huevos, lacteos y helados")
+    @cerdo = Comida_clasif.new("Cerdo", 21.5, 0.0, 6.3, "carnes y derivados")
+    @ternera = Comida_clasif.new("Ternera", 21.1, 0.0, 3.1, "carnes y derivados")
+    @pollo = Comida_clasif.new("Pollo", 20.6, 0.0, 5.6, "carnes y derivados")
+    @bacalao = Comida_clasif.new("Bacalao", 17.7, 0.0, 0.4, "pescados y mariscos")
+    @atun = Comida_clasif.new("Atun", 21.5, 0.0, 15.5, "pescados y mariscos")
+    @salmon = Comida_clasif.new("Salmon", 19.9, 0.0, 13.6, "pescados y mariscos")
     @my_list = List.new(@huevo)
   end
 
@@ -40,8 +40,8 @@ describe Alimento do
       expect(@huevo.lipids).to eq(19.5)
     end
 
-    it 'show us the 3 values' do
-      expect(@huevo.to_s).to eq('p: 14.1, c: 0.0, l: 19.5')
+    it 'modification, now show us all the values' do
+      expect(@huevo.to_s).to eq('Huevo belong to huevos, lacteos y helados and its qualities are p: 14.1, c: 0.0, l: 19.5')
     end
   end
 
@@ -72,7 +72,21 @@ describe Alimento do
     end
   end
  
+  describe "#Herencia" do
+    it 'Checking the class and the superclass' do
+      expect(@leche.instance_of?Comida_clasif).to eq(true)
+      expect(@leche.is_a?Comida).to eq(true)
+      expect(@leche.type).to eq("huevos, lacteos y helados")
 
+      expect(@cerdo.instance_of?Comida_clasif).to eq(true)
+      expect(@cerdo.is_a?Comida).to eq(true)
+      expect(@cerdo.type).to eq("carnes y derivados")
+
+      expect(@bacalao.instance_of?Comida_clasif).to eq(true)
+      expect(@bacalao.is_a?Comida).to eq(true)
+      expect(@bacalao.type).to eq("pescados y mariscos")
+    end
+  end
 
 
   describe "#Initializing the List" do
@@ -113,6 +127,15 @@ describe Alimento do
       expect(@my_list.head.value.lipids).to eq(13.6)
       expect(@my_list.head.next.value.name).to eq("Atun")
     end
-    
+
+    #it 'extracting the tale' do
+    #  extracted_node = Node.new
+    #  extracted_node = @my_list.extract_tale 
+    #  expect(extracted_node.value.name).to eq("Pollo")
+    #  expect(@my_list.tale.prev.value.name).to eq("Cerdo")
+    #  expect(@my_list.tale.value.name).to eq("Ternera")
+    #  expect(@my_list.tale.next).to eq(nil)
+    #end   
+
   end
 end
