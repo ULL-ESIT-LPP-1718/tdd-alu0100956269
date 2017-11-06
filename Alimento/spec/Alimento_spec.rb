@@ -1,12 +1,16 @@
 require 'spec_helper'
-require 'minitest/autorun'
-require 'minitest/spec'
+#require 'minitest/autorun'
+#require 'minitest/spec'
 $:.unshift File.expand_path(File.dirname(__FILE__) + 'lib')
 require 'Alimento/Comida.rb'
+require 'Alimento/List.rb'
 
 describe Alimento do
   before :all do
     @huevo = Comida.new("Huevo", 14.1, 0.0, 19.5)
+    @leche = Comida.new("Leche", 3.3, 4.8, 3.2)
+    @yogurt = Comida.new("Yogurt", 3.8, 4.9, 3.8)
+    @my_list = List.new(@huevo)
   end
 
   it 'has a version number' do
@@ -52,7 +56,20 @@ describe Alimento do
     end
   end
  
-  it 'does something useful' do
-    expect(false).to eq(true)
+
+
+
+  describe "#Initializing the List" do
+    it 'the first node' do
+      expect(@my_list.head.prev).to eq(nil)
+      expect(@my_list.head.value.name).to eq("Huevo")
+      expect(@my_list.head.next).to eq(nil)
+
+      expect(@my_list.tale.prev).to eq(nil)
+      expect(@my_list.tale.value.name).to eq("Huevo")
+      expect(@my_list.tale.next).to eq(nil)
+    end
+
+    
   end
 end

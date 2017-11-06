@@ -29,3 +29,4 @@ class Comida
     return @energ_val
   end
 end
+
