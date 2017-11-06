@@ -24,4 +24,16 @@ class List
     @head = insertnode
   end
 
+  def insert_mto_tale(node_array) #insert More Than One in tale
+    node_array.each do |food|
+      insert_tale(food)
+    end
+  end
+
+  def insert_mto_head(node_array) #insert More Than One in head
+    node_array.each do |food|
+      insert_head(food)
+    end
+  end
+
 end

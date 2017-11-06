@@ -10,6 +10,12 @@ describe Alimento do
     @huevo = Comida.new("Huevo", 14.1, 0.0, 19.5)
     @leche = Comida.new("Leche", 3.3, 4.8, 3.2)
     @yogurt = Comida.new("Yogurt", 3.8, 4.9, 3.8)
+    @cerdo = Comida.new("Cerdo", 21.5, 0.0, 6.3)
+    @ternera = Comida.new("Ternera", 21.1, 0.0, 3.1)
+    @pollo = Comida.new("Pollo", 20.6, 0.0, 5.6)
+    @bacalao = Comida.new("Bacalao", 17.7, 0.0, 0.4)
+    @atun = Comida.new("Atun", 21.5, 0.0, 15.5)
+    @salmon = Comida.new("Salmon", 19.9, 0.0, 13.6)
     @my_list = List.new(@huevo)
   end
 
@@ -92,6 +98,20 @@ describe Alimento do
       expect(@my_list.head.value.name).to eq("Yogurt")
       expect(@my_list.head.value.lipids).to eq(3.8)
       expect(@my_list.head.next.value.name).to eq("Huevo")
+    end
+
+    it 'inserting more than one node' do
+      @my_list.insert_mto_tale([@cerdo, @ternera, @pollo])
+      expect(@my_list.tale.prev.value.name).to eq("Ternera")
+      expect(@my_list.tale.value.name).to eq("Pollo")
+      expect(@my_list.tale.value.proteins).to eq(20.6)
+      expect(@my_list.tale.next).to eq(nil)
+
+      @my_list.insert_mto_head([@bacalao, @atun, @salmon])
+      expect(@my_list.head.prev).to eq(nil)
+      expect(@my_list.head.value.name).to eq("Salmon")
+      expect(@my_list.head.value.lipids).to eq(13.6)
+      expect(@my_list.head.next.value.name).to eq("Atun")
     end
     
   end
