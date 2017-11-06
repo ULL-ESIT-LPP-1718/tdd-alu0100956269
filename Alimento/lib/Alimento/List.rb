@@ -12,4 +12,16 @@ class List
     @tale = @head
   end
 
+  def insert_tale(node)
+    insertnode = Node.new(node,nil,@tale)
+    @tale.next = insertnode
+    @tale = insertnode
+  end
+
+  def insert_head(node)
+    insertnode = Node.new(node,@head,nil)
+    @head.prev = insertnode
+    @head = insertnode
+  end
+
 end

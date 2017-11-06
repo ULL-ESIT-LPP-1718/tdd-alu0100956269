@@ -70,6 +70,19 @@ describe Alimento do
       expect(@my_list.tale.next).to eq(nil)
     end
 
+    it 'more than one node' do
+      @my_list.insert_tale(@leche)
+      expect(@my_list.tale.prev.value.name).to eq("Huevo")
+      expect(@my_list.tale.value.name).to eq("Leche")
+      expect(@my_list.tale.value.proteins).to eq(3.3)
+      expect(@my_list.tale.next).to eq(nil)
+
+      @my_list.insert_head(@yogurt)
+      expect(@my_list.head.prev).to eq(nil)
+      expect(@my_list.head.value.name).to eq("Yogurt")
+      expect(@my_list.head.value.lipids).to eq(3.8)
+      expect(@my_list.head.next.value.name).to eq("Huevo")
+    end
     
   end
 end
