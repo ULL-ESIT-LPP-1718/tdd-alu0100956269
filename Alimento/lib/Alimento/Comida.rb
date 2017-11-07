@@ -47,7 +47,7 @@ class Comida_clasif < Comida
   attr_reader :type
  
   def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value)
-    super (name_value, proteins_value, carbohydrates_value, lipids_value)
+    super(name_value, proteins_value, carbohydrates_value, lipids_value)
     @type = type_value
   end
 

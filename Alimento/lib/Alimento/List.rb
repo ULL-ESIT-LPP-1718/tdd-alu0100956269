@@ -35,5 +35,22 @@ class List
     end
   end
 
+  def extract_tale
+    extracted_node = Node.new
+    extracted_node = @tale
+    @tale = @tale.prev
+    @tale.next = nil
+    extracted_node.prev = nil
+    return extracted_node
+  end
+
+  def extract_head
+    extracted_node = Node.new
+    extracted_node = @head
+    @head = @head.next
+    @head.prev = nil
+    extracted_node.next = nil
+    return extracted_node
+  end
   
 end
