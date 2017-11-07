@@ -11,6 +11,20 @@ class List
     @tale = @head
   end
 
+  def to_s
+    aux="{"
+    node = Node.new
+    node = @head
+    while (node != tale) do
+      aux += node.value.name
+      aux += ", "
+      node = node.next
+    end
+    aux += node.value.name
+    aux += "}"
+    return aux
+  end
+
   def insert_tale(node)
     insertnode = Node.new(node,nil,@tale)
     @tale.next = insertnode
@@ -35,5 +49,22 @@ class List
     end
   end
 
+  def extract_tale
+    extracted_node = Node.new
+    extracted_node = @tale
+    @tale = @tale.prev
+    @tale.next = nil
+    extracted_node.prev = nil
+    return extracted_node
+  end
+
+  def extract_head
+    extracted_node = Node.new
+    extracted_node = @head
+    @head = @head.next
+    @head.prev = nil
+    extracted_node.next = nil
+    return extracted_node
+  end
   
 end

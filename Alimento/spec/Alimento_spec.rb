@@ -16,6 +16,11 @@ describe Alimento do
     @bacalao = Comida_clasif.new("Bacalao", 17.7, 0.0, 0.4, "pescados y mariscos")
     @atun = Comida_clasif.new("Atun", 21.5, 0.0, 15.5, "pescados y mariscos")
     @salmon = Comida_clasif.new("Salmon", 19.9, 0.0, 13.6, "pescados y mariscos")
+    @aceite = Comida_clasif.new("Aceite de Oliva", 0.0, 0.2, 99.6, "alimentos grasos")
+    @azucar = Comida_clasif.new("Azucar", 0.0, 99.8, 0.0, "alimentos ricos en carbohidratos")
+    @tomate = Comida_clasif.new("Tomate", 1.0, 3.5, 0.2, "verduras y hortalizas") 
+    @manzana = Comida_clasif.new("Manzana", 0.3, 12.4, 0.4, "frutas")
+
     @my_list = List.new(@huevo)
   end
 
@@ -84,7 +89,40 @@ describe Alimento do
 
       expect(@bacalao.instance_of?Comida_clasif).to eq(true)
       expect(@bacalao.is_a?Comida).to eq(true)
+      expect(@bacalao.is_a?Object).to eq(true)
+      expect(@bacalao.is_a?BasicObject).to eq(true)
       expect(@bacalao.type).to eq("pescados y mariscos")
+
+      expect(@aceite.instance_of?Comida_clasif).to eq(true)
+      expect(@aceite.is_a?Comida).to eq(true)
+      expect(@aceite.is_a?Object).to eq(true)
+      expect(@aceite.is_a?BasicObject).to eq(true)
+      expect(@aceite.type).to eq("alimentos grasos")
+      expect(@aceite.proteins).to eq(0.0)
+
+      expect(@azucar.instance_of?Comida_clasif).to eq(true)
+      expect(@azucar.is_a?Comida).to eq(true)
+      expect(@azucar.is_a?Object).to eq(true)
+      expect(@azucar.is_a?BasicObject).to eq(true)
+      expect(@azucar.type).to eq("alimentos ricos en carbohidratos")
+      expect(@azucar.name).to eq("Azucar")
+      expect(@azucar.proteins).to eq(0.0)
+
+      expect(@tomate.instance_of?Comida_clasif).to eq(true)
+      expect(@tomate.is_a?Comida).to eq(true)
+      expect(@tomate.is_a?Object).to eq(true)
+      expect(@tomate.is_a?BasicObject).to eq(true)
+      expect(@tomate.type).to eq("verduras y hortalizas")
+      expect(@tomate.name).to eq("Tomate")
+      expect(@tomate.proteins).to eq(1.0)
+
+      expect(@manzana.instance_of?Comida_clasif).to eq(true)
+      expect(@manzana.is_a?Comida).to eq(true)
+      expect(@manzana.is_a?Object).to eq(true)
+      expect(@manzana.is_a?BasicObject).to eq(true)
+      expect(@manzana.type).to eq("frutas")
+      expect(@manzana.name).to eq("Manzana")
+      expect(@manzana.proteins).to eq(0.3)
     end
   end
 
@@ -126,16 +164,39 @@ describe Alimento do
       expect(@my_list.head.value.name).to eq("Salmon")
       expect(@my_list.head.value.lipids).to eq(13.6)
       expect(@my_list.head.next.value.name).to eq("Atun")
+    end   
+
+    it 'proving the to_s function' do
+      expect(@my_list.to_s).to eq("{Salmon, Atun, Bacalao, Yogurt, Huevo, Leche, Cerdo, Ternera, Pollo}")
     end
 
-    #it 'extracting the tale' do
-    #  extracted_node = Node.new
-    #  extracted_node = @my_list.extract_tale 
-    #  expect(extracted_node.value.name).to eq("Pollo")
-    #  expect(@my_list.tale.prev.value.name).to eq("Cerdo")
-    #  expect(@my_list.tale.value.name).to eq("Ternera")
-    #  expect(@my_list.tale.next).to eq(nil)
-    #end   
+    it 'extracting from the tale' do
+      extracted_node = Node.new
+      extracted_node = @my_list.extract_tale 
+      expect(extracted_node.value.name).to eq("Pollo")
+      expect(extracted_node.prev).to eq(nil)
+      expect(extracted_node.next).to eq(nil)
+      expect(@my_list.tale.prev.value.name).to eq("Cerdo")
+      expect(@my_list.tale.value.name).to eq("Ternera")
+      expect(@my_list.tale.next).to eq(nil)
+    end  
 
+    it 'extracting from the head' do
+      extracted_node = Node.new
+      extracted_node = @my_list.extract_head 
+      expect(extracted_node.value.name).to eq("Salmon")
+      expect(extracted_node.prev).to eq(nil)
+      expect(extracted_node.next).to eq(nil)
+      expect(@my_list.head.next.value.name).to eq("Bacalao")
+      expect(@my_list.head.value.name).to eq("Atun")
+      expect(@my_list.head.prev).to eq(nil)
+    end 
+  end
+
+
+  describe "#Comparable & Enumerable" do
+    it 'proving the <=> comparable' do
+      
+    end
   end
 end
