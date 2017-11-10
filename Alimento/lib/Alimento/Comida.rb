@@ -1,5 +1,7 @@
 
 class Comida
+  include Comparable
+
   attr_reader :name, :proteins, :carbohydrates, :lipids
   
   def initialize (name_value, proteins_value, carbohydrates_value, lipids_value)
@@ -38,6 +40,16 @@ class Comida
 
   def show_ev
     "The fortmated values are: p->#{format_proteins}, c->#{format_ch}, l->#{format_lipids}; The energ. value is -> #{val_energ} kcal"
+  end
+
+  def <=>(other_food) 
+    return nil unless other_food.is_a?Comida
+    val_energ <=> other_food.val_energ
+  end
+
+  def ==(other_food)
+    return nil unless other_food.is_a?Comida
+    (@name == other_food.name) && (val_energ == other_food.val_energ)
   end
 end
 

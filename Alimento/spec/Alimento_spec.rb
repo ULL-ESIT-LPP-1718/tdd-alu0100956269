@@ -195,8 +195,36 @@ describe Alimento do
 
 
   describe "#Comparable & Enumerable" do
-    it 'proving the <=> comparable' do
-      
+    it 'do not compare Comida with a number' do
+      number = 3
+      expect(@huevo < number).to eq(nil)
+    end
+
+    it 'the energetic value of Huevo is bigger than the enrg.value of Leche' do
+      expect(@huevo > @leche).to eq(true)
+    end
+
+    it 'EVs < or <= than others' do
+      expect(@huevo <= @huevo).to eq(true)
+      expect(@huevo <= @leche).to eq(false)
+      expect(@leche <= @cerdo).to eq(true)
+    end
+
+   it 'EVs > or >= than others' do
+      expect(@cerdo <= @cerdo).to eq(true)
+      expect(@cerdo >= @leche).to eq(true)
+      expect(@leche >= @cerdo).to eq(false)
+    end
+
+   it 'EVs == than others' do
+      milk = Comida_clasif.new("Leche", 3.3, 4.8, 3.2, "huevos, lacteos y helados")
+      newmilk = Comida_clasif.new("Leche", 3.0, 4.8, 3.2, "huevos, lacteos y helados")
+      badmilk= Comida_clasif.new("BadLeche", 3.3, 4.8, 3.2, "huevos, lacteos y helados")
+      expect(@huevo == @huevo).to eq(true)
+      expect(@huevo == @leche).to eq(false)
+      expect(@leche == milk).to eq(true)
+      expect(@leche == newmilk).to eq(false)
+      expect(@leche == badmilk).to eq(false)
     end
   end
 end
