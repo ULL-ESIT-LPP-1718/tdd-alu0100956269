@@ -204,6 +204,7 @@ describe Alimento do
       expect(@huevo > @leche).to eq(true)
     end
 
+<<<<<<< HEAD
     it 'EVs < or <= than others' do
       expect(@huevo <= @huevo).to eq(true)
       expect(@huevo <= @leche).to eq(false)
@@ -215,6 +216,29 @@ describe Alimento do
       expect(@cerdo >= @leche).to eq(true)
       expect(@leche >= @cerdo).to eq(false)
     end
+=======
+    it 'extracting from the tale' do
+      extracted_node = Node.new
+      extracted_node = @my_list.extract_tale 
+      expect(extracted_node.value.name).to eq("Pollo")
+      expect(extracted_node.prev).to eq(nil)
+      expect(extracted_node.next).to eq(nil)
+      expect(@my_list.tale.prev.value.name).to eq("Cerdo")
+      expect(@my_list.tale.value.name).to eq("Ternera")
+      expect(@my_list.tale.next).to eq(nil)
+    end  
+
+    it 'extracting from the head' do
+      extracted_node = Node.new
+      extracted_node = @my_list.extract_head 
+      expect(extracted_node.value.name).to eq("Salmon")
+      expect(extracted_node.prev).to eq(nil)
+      expect(extracted_node.next).to eq(nil)
+      expect(@my_list.head.next.value.name).to eq("Bacalao")
+      expect(@my_list.head.value.name).to eq("Atun")
+      expect(@my_list.head.prev).to eq(nil)
+    end 
+>>>>>>> 47798f525df909717e6bb2f8176942c6066f4940
 
    it 'EVs == than others' do
       milk = Comida_clasif.new("Leche", 3.3, 4.8, 3.2, "huevos, lacteos y helados")
