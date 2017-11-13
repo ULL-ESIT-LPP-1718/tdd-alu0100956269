@@ -3,12 +3,13 @@
 Node = Struct.new(:value, :next, :prev)
 
 class List
- 
-  attr_reader :head, :tale
+  include Enumerable
+  attr_reader :head, :tale, :num_elem
 
   def initialize (node)
     @head = Node.new(node,nil,nil)
     @tale = @head
+    @num_elem = 1
   end
 
   def to_s
@@ -29,12 +30,14 @@ class List
     insertnode = Node.new(node,nil,@tale)
     @tale.next = insertnode
     @tale = insertnode
+    @num_elem += 1
   end
 
   def insert_head(node)
     insertnode = Node.new(node,@head,nil)
     @head.prev = insertnode
     @head = insertnode
+    @num_elem += 1
   end
 
   def insert_mto_tale(node_array) #insert More Than One in tale
@@ -55,6 +58,7 @@ class List
     @tale = @tale.prev
     @tale.next = nil
     extracted_node.prev = nil
+    @num_elem -= 1
     return extracted_node
   end
 
@@ -64,7 +68,19 @@ class List
     @head = @head.next
     @head.prev = nil
     extracted_node.next = nil
+    @num_elem -= 1
     return extracted_node
+  end
+
+  def each
+    aux = Node.new
+    aux = @head
+    tam = @num_elem
+    for i in (1..tam)
+      yield aux.value
+      aux = aux.next
+    end
+
   end
   
 end

@@ -136,6 +136,8 @@ describe Alimento do
       expect(@my_list.tale.prev).to eq(nil)
       expect(@my_list.tale.value.name).to eq("Huevo")
       expect(@my_list.tale.next).to eq(nil)
+
+      expect(@my_list.num_elem).to eq(1)
     end
 
     it 'more than one node' do
@@ -164,6 +166,9 @@ describe Alimento do
       expect(@my_list.head.value.name).to eq("Salmon")
       expect(@my_list.head.value.lipids).to eq(13.6)
       expect(@my_list.head.next.value.name).to eq("Atun")
+
+      
+      expect(@my_list.num_elem).to eq(9)
     end   
 
     it 'proving the to_s function' do
@@ -179,6 +184,7 @@ describe Alimento do
       expect(@my_list.tale.prev.value.name).to eq("Cerdo")
       expect(@my_list.tale.value.name).to eq("Ternera")
       expect(@my_list.tale.next).to eq(nil)
+      expect(@my_list.num_elem).to eq(8)
     end  
 
     it 'extracting from the head' do
@@ -190,11 +196,12 @@ describe Alimento do
       expect(@my_list.head.next.value.name).to eq("Bacalao")
       expect(@my_list.head.value.name).to eq("Atun")
       expect(@my_list.head.prev).to eq(nil)
+      expect(@my_list.num_elem).to eq(7)
     end 
   end
 
 
-  describe "#Comparable & Enumerable" do
+  describe "#Comparable" do
     it 'do not compare Comida with a number' do
       number = 3
       expect(@huevo < number).to eq(nil)
@@ -204,7 +211,6 @@ describe Alimento do
       expect(@huevo > @leche).to eq(true)
     end
 
-<<<<<<< HEAD
     it 'EVs < or <= than others' do
       expect(@huevo <= @huevo).to eq(true)
       expect(@huevo <= @leche).to eq(false)
@@ -216,29 +222,6 @@ describe Alimento do
       expect(@cerdo >= @leche).to eq(true)
       expect(@leche >= @cerdo).to eq(false)
     end
-=======
-    it 'extracting from the tale' do
-      extracted_node = Node.new
-      extracted_node = @my_list.extract_tale 
-      expect(extracted_node.value.name).to eq("Pollo")
-      expect(extracted_node.prev).to eq(nil)
-      expect(extracted_node.next).to eq(nil)
-      expect(@my_list.tale.prev.value.name).to eq("Cerdo")
-      expect(@my_list.tale.value.name).to eq("Ternera")
-      expect(@my_list.tale.next).to eq(nil)
-    end  
-
-    it 'extracting from the head' do
-      extracted_node = Node.new
-      extracted_node = @my_list.extract_head 
-      expect(extracted_node.value.name).to eq("Salmon")
-      expect(extracted_node.prev).to eq(nil)
-      expect(extracted_node.next).to eq(nil)
-      expect(@my_list.head.next.value.name).to eq("Bacalao")
-      expect(@my_list.head.value.name).to eq("Atun")
-      expect(@my_list.head.prev).to eq(nil)
-    end 
->>>>>>> 47798f525df909717e6bb2f8176942c6066f4940
 
    it 'EVs == than others' do
       milk = Comida_clasif.new("Leche", 3.3, 4.8, 3.2, "huevos, lacteos y helados")
@@ -249,6 +232,90 @@ describe Alimento do
       expect(@leche == milk).to eq(true)
       expect(@leche == newmilk).to eq(false)
       expect(@leche == badmilk).to eq(false)
+    end
+  end
+
+  describe "#Enumerable" do
+    before :each do
+      @other_list = List.new(@leche)
+      @other_list.insert_tale(nil)
+      @other_list.insert_tale(@cerdo)      
+    end
+
+    it 'checking the all? method' do
+      expect(@other_list.all?).to eq(false)
+      expect(@my_list.all?).to eq(true)
+    end 
+
+    it 'checking the any? method' do
+      expect(@other_list.any?).to eq(true)
+      
+      @other_list.extract_tale
+      @other_list.extract_head
+      expect(@other_list.any?).to eq(false)
+    end 
+
+    it 'checking the collect method' do
+      @other_list.extract_tale
+      @other_list.extract_tale
+      @other_list.insert_tale(@cerdo)
+      expect(@other_list.map{|i| i.name + "MapChecking"}).to eq(["LecheMapChecking", "CerdoMapChecking"])
+      expect(@other_list.map{|i| i.name + "MapChecking"}).to eq(["LecheMapChecking", "CerdoMapChecking"])
+    end 
+
+    it 'checking the count method' do
+      expect(@other_list.count).to eq(3)
+    end
+
+    it 'checking the detect method' do
+      @other_list.extract_tale
+      @other_list.extract_tale
+      @other_list.insert_tale(@cerdo)
+      aux1 = @other_list.detect {|i| i.name == "Leche"}
+      aux2 = @other_list.find {|i| i.name == "Ternera"}
+      expect(aux1.name).to eq("Leche")
+      expect(aux2).to eq(nil)
+    end
+
+    it 'checking the drop method' do
+      aux = @other_list.drop(1)
+      s=""
+      aux.each do |iter|
+        if (iter == nil)
+          s += "NULO "
+        else
+          s += "#{iter.name} "
+        end
+      end  
+      expect(s).to eq("NULO Cerdo ")
+    end
+
+    it 'checking the max method' do
+      @other_list.extract_tale
+      @other_list.extract_tale
+      @other_list.insert_tale(@cerdo)
+      aux = @other_list.max
+      expect(aux.name).to eq("Cerdo")
+    end
+
+    it 'checking the min method' do
+      @other_list.extract_tale
+      @other_list.extract_tale
+      @other_list.insert_tale(@cerdo)
+      aux = @other_list.min
+      expect(aux.name).to eq("Leche")
+    end
+
+    it 'checking the sort method' do
+      @other_list.extract_tale
+      @other_list.extract_tale
+      @other_list.insert_mto_tale([@cerdo, @yogurt, @tomate])
+      aux = @other_list.sort
+      s=""
+      aux.each do |iter|
+        s += "#{iter.name} "
+      end      
+      expect(s).to eq("Tomate Leche Yogurt Cerdo ")
     end
   end
 end
