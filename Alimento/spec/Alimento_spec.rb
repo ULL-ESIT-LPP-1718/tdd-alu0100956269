@@ -201,7 +201,7 @@ describe Alimento do
   end
 
 
-  describe "#Comparable" do
+  describe "#Comparable for Comida" do
     it 'do not compare Comida with a number' do
       number = 3
       expect(@huevo < number).to eq(nil)
@@ -235,7 +235,7 @@ describe Alimento do
     end
   end
 
-  describe "#Enumerable" do
+  describe "#Enumerable for List" do
     before :each do
       @other_list = List.new(@leche)
       @other_list.insert_tale(nil)
