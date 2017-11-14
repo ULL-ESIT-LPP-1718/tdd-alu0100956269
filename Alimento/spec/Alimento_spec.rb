@@ -271,51 +271,33 @@ describe Alimento do
       @other_list.extract_tale
       @other_list.extract_tale
       @other_list.insert_tale(@cerdo)
-      aux1 = @other_list.detect {|i| i.name == "Leche"}
-      aux2 = @other_list.find {|i| i.name == "Ternera"}
-      expect(aux1.name).to eq("Leche")
-      expect(aux2).to eq(nil)
+      expect(@other_list.detect {|i| i == @leche}).to eq(@leche)
+      expect(@other_list.detect {|i| i == @ternera}).to eq(nil)
     end
 
     it 'checking the drop method' do
-      aux = @other_list.drop(1)
-      s=""
-      aux.each do |iter|
-        if (iter == nil)
-          s += "NULO "
-        else
-          s += "#{iter.name} "
-        end
-      end  
-      expect(s).to eq("NULO Cerdo ")
+      expect(@other_list.drop(1)).to eq([nil, @cerdo])      
     end
 
     it 'checking the max method' do
       @other_list.extract_tale
       @other_list.extract_tale
-      @other_list.insert_tale(@cerdo)
-      aux = @other_list.max
-      expect(aux.name).to eq("Cerdo")
+      @other_list.insert_mto_tale([@cerdo, @yogurt, @tomate]) 
+      expect(@other_list.max).to eq(@cerdo)
     end
 
     it 'checking the min method' do
       @other_list.extract_tale
       @other_list.extract_tale
-      @other_list.insert_tale(@cerdo)
-      aux = @other_list.min
-      expect(aux.name).to eq("Leche")
+      @other_list.insert_mto_tale([@cerdo, @yogurt, @tomate])
+      expect(@other_list.min).to eq(@tomate)
     end
 
     it 'checking the sort method' do
       @other_list.extract_tale
       @other_list.extract_tale
       @other_list.insert_mto_tale([@cerdo, @yogurt, @tomate])
-      aux = @other_list.sort
-      s=""
-      aux.each do |iter|
-        s += "#{iter.name} "
-      end      
-      expect(s).to eq("Tomate Leche Yogurt Cerdo ")
+      expect(@other_list.sort).to eq([@tomate, @leche, @yogurt, @cerdo])
     end
   end
 end
