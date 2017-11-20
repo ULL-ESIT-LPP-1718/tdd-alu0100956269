@@ -1,9 +1,6 @@
 require 'spec_helper'
-#require 'minitest/autorun'
-#require 'minitest/spec'
 $:.unshift File.expand_path(File.dirname(__FILE__) + 'lib')
-require 'Alimento/Comida.rb'
-require 'Alimento/List.rb'
+
 
 describe Alimento do
   before :all do

@@ -9,15 +9,16 @@ class Comida
   include Comparable
 
   #Getters de las distintas variables de instancia
-  attr_reader :name, :proteins, :carbohydrates, :lipids
+  attr_reader :name, :proteins, :carbohydrates, :lipids, :g
   
   #Se asignan los valores que debe tener el alimento, es decir, 
   #su nombre, numero de proteinas, glúcidos (carbohidratos) y lípidos
-  def initialize (name_value, proteins_value, carbohydrates_value, lipids_value)
+  def initialize (name_value, proteins_value, carbohydrates_value, lipids_value, g_matrix)
     @name = name_value
     @proteins = proteins_value
     @carbohydrates = carbohydrates_value
     @lipids = lipids_value
+    @g = g_matrix
   end
 #--
 #<<<<<<< HEAD
@@ -74,6 +75,61 @@ class Comida
     return nil unless other_food.is_a?Comida
     (@name == other_food.name) && (val_energ == other_food.val_energ)
   end
+
+
+  def aibc_imperative
+    i = 0
+    r = []
+    while i < @g.size
+      index = 1
+      s = []
+      while index < @g[i].size
+        if @g[i][index] < @g[i][0]
+        s << 0.0
+        else
+        s << (((@g[i][index] - @g[i][0]) + (@g[i][index-1] - @g[i][0]))/2)*5
+        end
+        index = index + 1
+      end
+      r << s
+      i = i + 1
+    end
+
+    suma = []
+    j = 0
+    while j < @g.size
+      k = 0
+      s = 0
+      while k < r[j].size
+        s = s + r[j][k]
+        k = k + 1
+      end
+      suma << s
+      j = j + 1
+    end
+    suma
+  end
+
+
+  def aibc_funcional
+    @g.each {
+      |x| 
+      x.map{
+        |y|
+        if y.value < x.head.value 
+	  y.value = 0.0
+        else
+          if y.value != x.head.value
+	    (((y.value-x.head.value) + (y.prev.value - x.head.value))/2) * 5
+	  else
+	    y.value = y.value
+	  end
+        end
+      }
+      x.inject{|sum, n| sum + n}    
+    }      
+  end
+
 end
 
 
@@ -84,8 +140,8 @@ class Comida_clasif < Comida
  
   #Llama al initialize de su clase padre para todos los valores menos para el tipo,
   #que se asigna en esta clase
-  def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value)
-    super(name_value, proteins_value, carbohydrates_value, lipids_value)
+  def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value, g_matrix)
+    super(name_value, proteins_value, carbohydrates_value, lipids_value, g_matrix)
     @type = type_value
   end
 

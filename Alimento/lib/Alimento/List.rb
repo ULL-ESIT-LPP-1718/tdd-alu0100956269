@@ -4,7 +4,11 @@
 # License::   Distributes under the same terms as Ruby
 
 # create a Struct with :value, :next and :prev
-Node = Struct.new(:value, :next, :prev)
+Node = Struct.new(:value, :next, :prev) do
+  def +(other)
+    @value = value + other.value
+  end
+end
 
 #Esta clase implementa una lista doblemente enlazada
 #Se ha incluido el mixin Enumerable
@@ -97,7 +101,7 @@ class List
     aux = @head
     tam = @num_elem
     for i in (1..tam)
-      yield aux.value
+      yield aux
       aux = aux.next
     end
 
