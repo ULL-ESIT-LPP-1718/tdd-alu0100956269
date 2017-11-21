@@ -9,16 +9,17 @@ class Comida
   include Comparable
 
   #Getters de las distintas variables de instancia
-  attr_reader :name, :proteins, :carbohydrates, :lipids, :g
-  
+  attr_reader :name, :proteins, :carbohydrates, :lipids
+  attr_accessor :g
+
   #Se asignan los valores que debe tener el alimento, es decir, 
   #su nombre, numero de proteinas, glúcidos (carbohidratos) y lípidos
-  def initialize (name_value, proteins_value, carbohydrates_value, lipids_value, g_matrix)
+  def initialize (name_value, proteins_value, carbohydrates_value, lipids_value)
     @name = name_value
     @proteins = proteins_value
     @carbohydrates = carbohydrates_value
     @lipids = lipids_value
-    @g = g_matrix
+    @g = nil
   end
 #--
 #<<<<<<< HEAD
@@ -153,8 +154,8 @@ class Comida_clasif < Comida
  
   #Llama al initialize de su clase padre para todos los valores menos para el tipo,
   #que se asigna en esta clase
-  def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value, g_matrix)
-    super(name_value, proteins_value, carbohydrates_value, lipids_value, g_matrix)
+  def initialize(name_value, proteins_value, carbohydrates_value, lipids_value, type_value)
+    super(name_value, proteins_value, carbohydrates_value, lipids_value)
     @type = type_value
   end
 

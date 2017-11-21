@@ -5,7 +5,3 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
-task :spec do
-	#sh "ruby -I spec/Alimento_spec.rb"
-        sh "ruby -I spec/aibc_spec.rb"
-end
