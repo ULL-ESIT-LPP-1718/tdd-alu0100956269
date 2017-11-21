@@ -101,7 +101,7 @@ class List
     aux = @head
     tam = @num_elem
     for i in (1..tam)
-      yield aux
+      yield aux.value
       aux = aux.next
     end
 

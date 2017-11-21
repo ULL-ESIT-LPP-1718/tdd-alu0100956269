@@ -112,24 +112,37 @@ class Comida
 
 
   def aibc_funcional
-    @g.each {
-      |x| 
-      x.map{
-        |y|
-        if y.value < x.head.value 
-	  y.value = 0.0
-        else
-          if y.value != x.head.value
-	    (((y.value-x.head.value) + (y.prev.value - x.head.value))/2) * 5
+    
+    r =[]
+    arr = []
+    @g.collect{
+      |x|
+      x.each_with_index{|y, index|
+        if(index != 0)
+	  if(y<x[0])
+	    arr[index-1]=0.0
 	  else
-	    y.value = y.value
-	  end
-        end
+	    arr[index-1] = ((((x[index]-x[0]) + (x[index-1]-x[0]))/2)*5)		
+	  end		
+	end
       }
-      x.inject{|sum, n| sum + n}    
-    }      
-  end
+      r.push(arr.reduce(:+))
+    }
+    r
 
+=begin
+    ge = (0...@g[0].size).to_a.zip(@g[0], @g[1])
+    puts "#{ge}"
+    @g.each_with_index{
+      |x, index| 
+      if (index != 0)
+        if (x[index] < x[0])
+	  (((x[index]-@g[0]) + (x[index-1]-x[0]))/2)*5
+	end
+      end
+     }
+=end
+  end
 end
 
 
