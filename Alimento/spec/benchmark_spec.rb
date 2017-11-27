@@ -27,16 +27,22 @@ describe "#Benchmark" do
     @platano = Comida_clasif.new("Platano", 1.2, 21.4, 0.2, "frutas")
     @pera = Comida_clasif.new("Pera", 0.5, 12.7, 0.3, "frutas")
 
-    @my_list = MyArray.new
-    @my_list = [@huevo, @leche, @yogurt, @cerdo, @ternera, @pollo, @bacalao, @atun, @salmon, @aceite, @mantequilla, @chocolate, @azucar, @arroz, @lentejas, @papas, @tomate, @cebolla, @calabaza, @manzana, @platano, @pera]
+    @my_list = List.new(@huevo)
+    @my_list.insert_mto_tale([@leche, @yogurt, @cerdo, @ternera, @pollo, @bacalao, @atun, @salmon, @aceite, @mantequilla, @chocolate, @azucar, @arroz, @lentejas, @papas, @tomate, @cebolla, @calabaza, @manzana, @platano, @pera])
   end
 
   it 'well array begin' do
-    expect(@my_list).to eq([@huevo, @leche, @yogurt, @cerdo, @ternera, @pollo, @bacalao, @atun, @salmon, @aceite, @mantequilla, @chocolate, @azucar, @arroz, @lentejas, @papas, @tomate, @cebolla, @calabaza, @manzana, @platano, @pera])
+    expect(@my_list.head.value).to eq(@huevo)
+    expect(@my_list.tale.value).to eq(@pera)
+    expect(@my_list.num_elem).to eq(22)
   end
 
   it 'sorting with sort' do
-    expect(@my_list.sort).to eq([@tomate, @calabaza, @cebolla, @manzana, @pera, @leche, @yogurt, @papas, @bacalao, @platano, @ternera, @pollo, @cerdo, @salmon, @atun, @huevo, @lentejas, @arroz, @azucar, @chocolate, @mantequilla,@pera])
+    expect(@my_list.sort).to eq([@tomate, @calabaza, @cebolla, @manzana, @pera, @leche, @yogurt, @papas, @bacalao, @platano, @ternera, @pollo, @cerdo, @salmon, @atun, @huevo, @lentejas, @arroz, @azucar, @chocolate, @mantequilla, @aceite])
+  end
+
+  it 'sorting with for' do
+    expect(@my_list.for_sort).to eq([@tomate, @calabaza, @cebolla, @manzana, @pera, @leche, @yogurt, @papas, @bacalao, @platano, @ternera, @pollo, @cerdo, @salmon, @atun, @huevo, @lentejas, @arroz, @azucar, @chocolate, @mantequilla, @aceite])
   end
 end
 
