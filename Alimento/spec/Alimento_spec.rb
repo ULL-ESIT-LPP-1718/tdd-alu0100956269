@@ -199,11 +199,6 @@ describe Alimento do
 
 
   describe "#Comparable for Comida" do
-    it 'do not compare Comida with a number' do
-      number = 3
-      expect(@huevo < number).to eq(nil)
-    end
-
     it 'the energetic value of Huevo is bigger than the enrg.value of Leche' do
       expect(@huevo > @leche).to eq(true)
     end
