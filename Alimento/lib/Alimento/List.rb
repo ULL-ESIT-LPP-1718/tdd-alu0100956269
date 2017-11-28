@@ -102,10 +102,10 @@ class List
     end
   end
 
+  #Se usan los bucles for para ordenar la lista, esta programación NO es funcional
   def for_sort
     sort_list = [@head.value]
-    auxnode = @head
-    
+    auxnode = @head    
     for i in(1...@num_elem) 
       auxnode = auxnode.next
       for j in(0..sort_list.size)
@@ -121,5 +121,32 @@ class List
     end
     return sort_list
   end
-  
+
+  def each_sort
+    sort_list = [@head.value]
+    self.each_with_index do 
+      |x, pos|
+      if(pos != 0)
+      sort_list.each_with_index do
+	|y, index|
+	if (index == (sort_list.size - 1))
+	  if(x < y)
+	    sort_list.insert(index, x)
+	    break
+	  else
+	    sort_list.push(x)
+	    break
+	  end
+	else
+	  if(x < y)
+	    sort_list.insert(index, x)
+	    break
+	  end
+	end
+      end
+      end
+    end
+    return sort_list
+  end
+
 end

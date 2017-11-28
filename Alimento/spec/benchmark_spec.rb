@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'benchmark'
+include Benchmark
 $:.unshift File.expand_path(File.dirname(__FILE__) + 'lib')
 
 
@@ -44,5 +46,19 @@ describe "#Benchmark" do
   it 'sorting with for' do
     expect(@my_list.for_sort).to eq([@tomate, @calabaza, @cebolla, @manzana, @pera, @leche, @yogurt, @papas, @bacalao, @platano, @ternera, @pollo, @cerdo, @salmon, @atun, @huevo, @lentejas, @arroz, @azucar, @chocolate, @mantequilla, @aceite])
   end
+
+  it 'sorting with each' do
+    expect(@my_list.each_sort).to eq([@tomate, @calabaza, @cebolla, @manzana, @pera, @leche, @yogurt, @papas, @bacalao, @platano, @ternera, @pollo, @cerdo, @salmon, @atun, @huevo, @lentejas, @arroz, @azucar, @chocolate, @mantequilla, @aceite])
+  end
+
+  it 'benchmark time' do
+    Benchmark.benchmark(CAPTION, 7, FORMAT, ">total:", ">avg:") do |x|
+      tf1 = x.report("for: ")    {vec = @my_list.for_sort}  
+      tf2 = x.report("each: ")   {vec2 = @my_list.each_sort}
+      tf3 = x.report("sort: ")   {vec3 = @my_list.sort}
+      [tf1+tf2+tf3, (tf1+tf2+tf3)/3]
+    end
+  end
+
 end
 
