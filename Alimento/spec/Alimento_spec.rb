@@ -17,7 +17,6 @@ describe Alimento do
     @azucar = Comida_clasif.new("Azucar", 0.0, 99.8, 0.0, "alimentos ricos en carbohidratos")
     @tomate = Comida_clasif.new("Tomate", 1.0, 3.5, 0.2, "verduras y hortalizas") 
     @manzana = Comida_clasif.new("Manzana", 0.3, 12.4, 0.4, "frutas")
-
     @my_list = List.new(@huevo)
   end
 
