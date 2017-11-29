@@ -53,8 +53,8 @@ describe "#Benchmark" do
 
   it 'benchmark time' do
     Benchmark.benchmark(CAPTION, 7, FORMAT, ">total:", ">avg:") do |x|
-      tf1 = x.report("for: ")    {vec = @my_list.for_sort}  
-      tf2 = x.report("each: ")   {vec2 = @my_list.each_sort}
+      tf1 = x.report("for: ")  {vec = @my_list.for_sort}  
+      tf2 = x.report("each: ")  {vec2 = @my_list.each_sort}
       tf3 = x.report("sort: ")   {vec3 = @my_list.sort}
       [tf1+tf2+tf3, (tf1+tf2+tf3)/3]
     end
