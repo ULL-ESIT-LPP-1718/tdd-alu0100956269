@@ -21,15 +21,15 @@ class Plato
   end
 
     TOMATE = Comida_clasif.new("Tomate", 1.0, 3.5, 0.2, "verduras y hortalizas") 
-    PLATANO = Comida_clasif.new("Platano", 1.2, 21.4, 0.2, "frutas")
+    PLATANO = Comida_clasif.new("Plátano", 1.2, 21.4, 0.2, "frutas")
     ARROZ = Comida_clasif.new("Arroz", 6.8, 77.7, 0.6, "alimentos ricos en carbohidratos")
     LENTEJAS = Comida_clasif.new("Lentejas", 23.5, 52.0, 1.4, "alimentos ricos en carbohidratos")
     HUEVO = Comida_clasif.new("Huevo", 14.1, 0.0, 19.5, "huevos, lacteos y helados")
-    ACEITE = Comida_clasif.new("Aceite de Oliva", 0.0, 0.2, 99.6, "alimentos grasos")
+    ACEITE = Comida_clasif.new("Aceite de oliva", 0.0, 0.2, 99.6, "alimentos grasos")
 
     ALIMENTOS = [TOMATE, PLATANO, ARROZ,LENTEJAS, HUEVO, ACEITE]
 
-    CANTIDAD = {' gramo' => 1, ' cucharada' => 20, ' cucharón' => 40, ' pieza pequeña' => 50, ' pieza mediana' => 75, ' pieza grande' => 100, ' taza' => 150}
+    CANTIDAD = {' gramo' => 1, ' cucharada' => 2, ' cucharón' => 4, ' pieza pequeña' => 5, ' pieza mediana' => 7.5, ' pieza grande' => 10, ' taza' => 15}
 
 
   def to_s
@@ -42,18 +42,112 @@ class Plato
     @vegetales.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids}  #{ALIMENTOS[index].val_energ}"      
+      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
     
-     num_of_pieces = /[0-9]+/.match(value[1])[0].to_i
-puts value[1]
- m1 = /\D+/.match(value[1]).to_s
+      n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
+      t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
 
-val_total = CANTIDAD[m1] * num_of_pieces
-puts val_total
+      if(t_o_p == '/')
+        n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
+        dividendo = n_o_p[0][0].to_f
+
+	puts dividendo
+	divisor = n_o_p[0][2].to_i
+	puts divisor
+	n_o_p = dividendo / divisor 
+
+        t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
+      end
+
+      total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
+      kcal_totales += total_value
+      salida << "#{total_value}"
     }
     
-   
+    @frutas.each{
+      |value|
+      index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
+      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+    
+      n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
+      t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
 
+      if(t_o_p == '/')
+        n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
+        dividendo = n_o_p[0][0].to_f
+	divisor = n_o_p[0][2].to_i
+	n_o_p = dividendo / divisor
+        t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
+      end
+
+      total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
+      kcal_totales += total_value
+      salida << "#{total_value}"
+    }
+   
+    @cereales.each{
+      |value|
+      index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
+      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+    
+      n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
+      t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
+
+      if(t_o_p == '/')
+        n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
+        dividendo = n_o_p[0][0].to_f
+	divisor = n_o_p[0][2].to_i
+	n_o_p = dividendo / divisor 
+        t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
+      end
+
+      total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
+      kcal_totales += total_value
+      salida << "#{total_value}"
+    }
+
+    @proteinas.each{
+      |value|
+      index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
+      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+    
+      n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
+      t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
+
+      if(t_o_p == '/')
+        n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
+        dividendo = n_o_p[0][0].to_f
+	divisor = n_o_p[0][2].to_i
+	n_o_p = dividendo / divisor 
+        t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
+      end
+
+      total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
+      kcal_totales += total_value
+      salida << "#{total_value}"
+    }
+
+    @aceites.each{
+      |value|
+      index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
+      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+    
+      n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
+      t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
+
+      if(t_o_p == '/')
+        n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
+        dividendo = n_o_p[0][0].to_f
+	divisor = n_o_p[0][2].to_i
+	n_o_p = dividendo / divisor 
+        t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
+      end
+
+      total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
+      kcal_totales += total_value
+      salida << "#{total_value}"
+    }
+    salida << "\n   kcal totales: #{kcal_totales}"
     salida
   end
 
@@ -68,28 +162,28 @@ puts val_total
   def fruta(name, options = {})
     fruta = []
     fruta[0] = name
-    fruta[1] = " (#{options[:porcion]})" if options[:porcion]
+    fruta[1] = "#{options[:porcion]}" if options[:porcion]
     @frutas << fruta
   end
 
   def cereal(name, options = {})
     cereal = []
     cereal[0] = name
-    cereal[1] = " (#{options[:porcion]})" if options[:porcion]
+    cereal[1] = "#{options[:porcion]}" if options[:porcion]
     @cereales << cereal
   end
 
   def proteina(name, options = {})
     proteina = []
     proteina[0] = name
-    proteina[1] = " (#{options[:porcion]})" if options[:porcion]
+    proteina[1] = "#{options[:porcion]}" if options[:porcion]
     @proteinas << proteina
   end
 
   def aceite(name, options = {})
     aceite = []
     aceite[0] = name
-    aceite[1] = " (#{options[:porcion]})" if options[:porcion]
+    aceite[1] = "#{options[:porcion]}" if options[:porcion]
     @aceites << aceite
   end
 
