@@ -37,12 +37,19 @@ class Plato
     salida = @name
     salida << "\n#{'=' * @name.size}\n\n"
     salida << "Composición nutricional \n"    
-    salida << "Nombre  Glc  Prt  Líp  Val.Energ."
+    salida << "Nombre".ljust(15)
+    salida << "Glucidos".ljust(15)
+    salida << "Proteinas".ljust(15)
+    salida << "Lípidos".ljust(15)
+    salida << "Val.Energ.".ljust(15)
 
     @vegetales.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+      salida << "\n#{ALIMENTOS[index].name}".ljust(16)
+      salida << " #{ALIMENTOS[index].carbohydrates}".ljust(15)
+      salida << " #{ALIMENTOS[index].proteins}".ljust(15)
+      salida << " #{ALIMENTOS[index].lipids}".ljust(15)     
     
       n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
       t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
@@ -61,13 +68,16 @@ class Plato
 
       total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
       kcal_totales += total_value
-      salida << "#{total_value}"
+      salida << " %0.2f".ljust(15) % [total_value]
     }
     
     @frutas.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+      salida << "\n#{ALIMENTOS[index].name}".ljust(16)
+      salida << " #{ALIMENTOS[index].carbohydrates}".ljust(15)
+      salida << " #{ALIMENTOS[index].proteins}".ljust(15)
+      salida << " #{ALIMENTOS[index].lipids}".ljust(15)     
     
       n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
       t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
@@ -75,20 +85,27 @@ class Plato
       if(t_o_p == '/')
         n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
         dividendo = n_o_p[0][0].to_f
+
+	puts dividendo
 	divisor = n_o_p[0][2].to_i
-	n_o_p = dividendo / divisor
+	puts divisor
+	n_o_p = dividendo / divisor 
+
         t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
       end
 
       total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
       kcal_totales += total_value
-      salida << "#{total_value}"
+      salida << " %0.2f".ljust(15) % [total_value]
     }
    
     @cereales.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+      salida << "\n#{ALIMENTOS[index].name}".ljust(16)
+      salida << " #{ALIMENTOS[index].carbohydrates}".ljust(15)
+      salida << " #{ALIMENTOS[index].proteins}".ljust(15)
+      salida << " #{ALIMENTOS[index].lipids}".ljust(15)     
     
       n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
       t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
@@ -96,20 +113,27 @@ class Plato
       if(t_o_p == '/')
         n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
         dividendo = n_o_p[0][0].to_f
+
+	puts dividendo
 	divisor = n_o_p[0][2].to_i
+	puts divisor
 	n_o_p = dividendo / divisor 
+
         t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
       end
 
       total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
       kcal_totales += total_value
-      salida << "#{total_value}"
+      salida << " %0.2f".ljust(15) % [total_value]
     }
 
     @proteinas.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+      salida << "\n#{ALIMENTOS[index].name}".ljust(16)
+      salida << " #{ALIMENTOS[index].carbohydrates}".ljust(15)
+      salida << " #{ALIMENTOS[index].proteins}".ljust(15)
+      salida << " #{ALIMENTOS[index].lipids}".ljust(15)     
     
       n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
       t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
@@ -117,20 +141,27 @@ class Plato
       if(t_o_p == '/')
         n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
         dividendo = n_o_p[0][0].to_f
+
+	puts dividendo
 	divisor = n_o_p[0][2].to_i
+	puts divisor
 	n_o_p = dividendo / divisor 
+
         t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
       end
 
       total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
       kcal_totales += total_value
-      salida << "#{total_value}"
+      salida << " %0.2f".ljust(15) % [total_value]
     }
 
     @aceites.each{
       |value|
       index = ALIMENTOS.find_index{ |obj| obj.name == value[0] }
-      salida << "\n#{ALIMENTOS[index].name}  #{ALIMENTOS[index].carbohydrates}  #{ALIMENTOS[index].proteins}  #{ALIMENTOS[index].lipids} "     
+      salida << "\n#{ALIMENTOS[index].name}".ljust(16)
+      salida << " #{ALIMENTOS[index].carbohydrates}".ljust(15)
+      salida << " #{ALIMENTOS[index].proteins}".ljust(15)
+      salida << " #{ALIMENTOS[index].lipids}".ljust(15)     
     
       n_o_p = /[0-9]+/.match(value[1])[0].to_i   #number_of_pieces
       t_o_p = /\D+/.match(value[1]).to_s         #type_of_piece
@@ -138,16 +169,23 @@ class Plato
       if(t_o_p == '/')
         n_o_p = /[0-9]+\/[0-9]+/.match(value[1]).to_a
         dividendo = n_o_p[0][0].to_f
+
+	puts dividendo
 	divisor = n_o_p[0][2].to_i
+	puts divisor
 	n_o_p = dividendo / divisor 
+
         t_o_p = /\D+/.match(value[1].tr('/','')).to_s   
       end
 
       total_value = CANTIDAD[t_o_p] * n_o_p * ALIMENTOS[index].val_energ
       kcal_totales += total_value
-      salida << "#{total_value}"
+      salida << " %0.2f".ljust(15) % [total_value]
+      
     }
-    salida << "\n   kcal totales: #{kcal_totales}"
+
+    salida << "\n\n ".ljust(47)
+    salida << "kcal totales: %0.2f" % [kcal_totales]
     salida
   end
 
